@@ -1,0 +1,2 @@
+com/parkvita/admin/springboot/web/HelloControllerTest.java
+ com.parkvita.admin.springboot.web.HelloControllerTest
