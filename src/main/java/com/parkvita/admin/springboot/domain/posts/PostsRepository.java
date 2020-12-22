@@ -1,6 +1,9 @@
 package com.parkvita.admin.springboot.domain.posts;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface PostsRepository extends JpaRepository<Posts,Long> {
 
@@ -11,5 +14,8 @@ public interface PostsRepository extends JpaRepository<Posts,Long> {
     *
     * 주의점은 Entity클래스와 기본 EntityRepository는 함께 위치해야함 그래서 도메인패키지에서 함께관리
     * */
+
+    @Query("SELECT p FROM Posts p ORDER BY p.id DESC")
+    List<Posts> findAllDesc();
 
 }
