@@ -14,11 +14,19 @@
 
 {{>layout/header}}  <!-- 현재 머스테치파일을 기준으로 다른 파일을 가져옴-->
 
-    <h1>스프링 부트로 시작하는 웹 서비스</h1>
+    <h1>스프링 부트로 시작하는 웹 서비스 Ver.2</h1>
     <div class = "col-md-12">
+        <!-- 로그인 기능 영역 -->
         <div class = "row">
             <div class = "col-md-6">
                 <a href="/posts/save" role="button" class = "btn btn-primary">글 등록</a>
+                {{#userName}}   <!--// 머스테치는 다른 언어같은 if 문 제공하지 않음 true/falseㅁㄴ 판단, 그래서머스테치에서는 항상 최종값을 넘겨줘야함 그래서 # 은 있으면 출력하도록함-->
+                    Logged in as: <span id="user">{{userName}}</span>
+                <a href="/logout" class="btn btn-info active" role="button">Logout</a>  <!--//스프링시큐리티에서 기본 제공하는 로그아웃 URL, 개발자가 별도로 저 URL에 해당하는 컨트롤러 만들 피료없음-->
+                {{/userName}}
+                {{^userName}}   <!--//머스테치에서 해당 값이 존재하지 않는 경우 ^ 사용 , 여기서는 userName이 없다면 로그인버튼 노출-->
+                    <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>    <!--//스프링시큐리티에서 기본 제공하는 로그인 url 마찬가지로 별도 컨트롤로 필요없음-->
+                {{/userName}}
             </div>
         </div>
         <br>
