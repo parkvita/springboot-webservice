@@ -25,7 +25,9 @@
                 <a href="/logout" class="btn btn-info active" role="button">Logout</a>  <!--//스프링시큐리티에서 기본 제공하는 로그아웃 URL, 개발자가 별도로 저 URL에 해당하는 컨트롤러 만들 피료없음-->
                 {{/userName}}
                 {{^userName}}   <!--//머스테치에서 해당 값이 존재하지 않는 경우 ^ 사용 , 여기서는 userName이 없다면 로그인버튼 노출-->
-                    <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>    <!--//스프링시큐리티에서 기본 제공하는 로그인 url 마찬가지로 별도 컨트롤로 필요없음-->
+                    <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">Google Login</a>
+                    <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">Naver Login</a>
+                    <!--//스프링시큐리티에서 기본 제공하는 로그인 url 마찬가지로 별도 컨트롤로 필요없음-->
                 {{/userName}}
             </div>
         </div>
