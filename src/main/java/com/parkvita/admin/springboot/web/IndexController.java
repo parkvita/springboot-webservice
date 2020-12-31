@@ -44,7 +44,13 @@ public class IndexController {
     }
 
     @GetMapping("/posts/save")
-    public String postsSave(){
+    public String postsSave(Model model, @LoginUser SessionUser user){
+
+        if(user!=null){
+            // 세션에 저장된 값이 있을때만 model에 userName 으로 등록, 저장된 값이 없으면 model엔 아무런 값이 없는 상태이니 로그인 버튼이 보임
+            model.addAttribute("userName",user.getName());
+        }
+
         return "posts-save";
     }
 
