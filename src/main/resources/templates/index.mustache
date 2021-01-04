@@ -57,8 +57,8 @@
         </table>
         <!-- 페이징 영역 -->
         <div>
-            <span each="pageNum : ${pageList}" inline="text">
-                <a href="@{'/?page=' + ${pageNum}">[[${pageNum}]]</a>
+            <span th:each="pageNum : ${pageList}" th:inline="text">
+                <a th:href="@{'/?page=' + ${pageNum}">[[${pageNum}]]</a>
             </span>
         </div>
         <!-- 검색창 영역 -->

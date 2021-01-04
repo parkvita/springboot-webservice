@@ -55,6 +55,12 @@
             {{/posts}}
             </tbody>
         </table>
+        <!-- 페이징 영역 -->
+        <div>
+            <span th:each="pageNum : ${pageList}" th:inline="text">
+                <a th:href="@{'/?page=' + ${pageNum}">[[${pageNum}]]</a>
+            </span>
+        </div>
         <!-- 검색창 영역 -->
         <div class = "row">
             <div class = "col-md-6">
