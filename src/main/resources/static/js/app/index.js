@@ -14,6 +14,10 @@ var main = {
         $('#btn-delete').on('click',function(){
            _this.delete()
         });
+        /*<!-- 검색 버튼 추가 -->*/
+        $('#btn-search').on('click',function(){
+            _this.search()
+        })
     },
     save : function(){
         var data = {
@@ -71,6 +75,7 @@ var main = {
             alert(JSON.stringify(error));
         });
     }
+
 };
 
 main.init();

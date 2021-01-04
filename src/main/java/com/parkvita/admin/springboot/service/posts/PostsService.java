@@ -2,14 +2,12 @@ package com.parkvita.admin.springboot.service.posts;
 
 import com.parkvita.admin.springboot.domain.posts.Posts;
 import com.parkvita.admin.springboot.domain.posts.PostsRepository;
-import com.parkvita.admin.springboot.web.dto.PostsListResponseDto;
-import com.parkvita.admin.springboot.web.dto.PostsResponseDto;
-import com.parkvita.admin.springboot.web.dto.PostsSaveRequestDto;
-import com.parkvita.admin.springboot.web.dto.PostsUpdateRequestDto;
+import com.parkvita.admin.springboot.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,4 +51,28 @@ public class PostsService {
                                             // 존재하는 Posts인지 확인을 위해 엔티티 조회 후 그대로 삭제
     }
 
+    @Transactional
+    public List<PostsDto> searchPosts(String keyword){
+        List<Posts> postsList = postsRepository.findByTitleContaining(keyword);
+        List<PostsDto> responseDtoList = new ArrayList<>();
+
+        if (postsList.isEmpty()) return responseDtoList;
+
+        for(Posts posts : postsList){
+            responseDtoList.add(this.convertEntityToDto(posts));
+
+        }
+
+        return responseDtoList;
+    }
+
+    private PostsDto convertEntityToDto(Posts postsEntity) {
+        return PostsDto.builder()
+                .id(postsEntity.getId())
+                .title(postsEntity.getTitle())
+                .content(postsEntity.getContent())
+                .author(postsEntity.getAuthor())
+                .modifiedDate(postsEntity.getModifiedDate())
+                .build();
+    }
 }

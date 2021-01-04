@@ -1,11 +1,12 @@
 package com.parkvita.admin.springboot.web;
 
 import com.parkvita.admin.springboot.service.posts.PostsService;
-import com.parkvita.admin.springboot.web.dto.PostsResponseDto;
-import com.parkvita.admin.springboot.web.dto.PostsSaveRequestDto;
-import com.parkvita.admin.springboot.web.dto.PostsUpdateRequestDto;
+import com.parkvita.admin.springboot.web.dto.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @RestController
@@ -33,5 +34,7 @@ public class PostsApiController {
         postsService.delete(id);
         return id;
     }
+
+
 
 }

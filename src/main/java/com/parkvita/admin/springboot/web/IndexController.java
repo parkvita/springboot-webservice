@@ -3,14 +3,18 @@ package com.parkvita.admin.springboot.web;
 import com.parkvita.admin.springboot.config.auth.LoginUser;
 import com.parkvita.admin.springboot.config.auth.dto.SessionUser;
 import com.parkvita.admin.springboot.service.posts.PostsService;
+import com.parkvita.admin.springboot.web.dto.PostsDto;
+import com.parkvita.admin.springboot.web.dto.PostsListResponseDto;
 import com.parkvita.admin.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -61,6 +65,16 @@ public class IndexController {
 
         return "posts-update";
     }
+
+    @GetMapping("/posts/search/")
+    public String search(@RequestParam(value="keyword") String keyword, Model model){
+        List<PostsDto> postsDtoList = postsService.searchPosts(keyword);
+
+        model.addAttribute("posts", postsDtoList);
+
+        return "index";
+    }
+
 
 
 
