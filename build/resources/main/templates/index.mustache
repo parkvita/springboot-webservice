@@ -38,6 +38,7 @@
                 <tr>
                     <th>게시글 번호</th>
                     <th>제목</th>
+                    <th>내용</th>
                     <th>작성자</th>
                     <th>최종 수정일</th>
                 </tr>
@@ -47,12 +48,23 @@
                 <tr>
                     <td>{{id}}</td>
                     <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+                    <td>{{content}}</td>
                     <td>{{author}}</td>
                     <td>{{modifiedDate}}</td>
                 </tr>
             {{/posts}}
             </tbody>
         </table>
+        <!-- 검색창 영역 -->
+        <div class = "row">
+            <div class = "col-md-6">
+                <form action="/posts/search" method="GET">
+                    <input name="keyword" type="text" placeholder="검색어를 입력해주세요">
+                    <button>검색하기</button>
+                </form>
+            </div>
+        </div>
+
     </div>
 
 

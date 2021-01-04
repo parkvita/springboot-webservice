@@ -66,7 +66,7 @@ public class IndexController {
         return "posts-update";
     }
 
-    @GetMapping("/posts/search/")
+    @GetMapping("/posts/search")
     public String search(@RequestParam(value="keyword") String keyword, Model model){
         List<PostsDto> postsDtoList = postsService.searchPosts(keyword);
 
