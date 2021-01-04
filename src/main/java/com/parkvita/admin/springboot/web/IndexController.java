@@ -67,10 +67,15 @@ public class IndexController {
     }
 
     @GetMapping("/posts/search")
-    public String search(@RequestParam(value="keyword") String keyword, Model model){
+    public String search(@RequestParam(value="keyword") String keyword, Model model, @LoginUser SessionUser user){
         List<PostsDto> postsDtoList = postsService.searchPosts(keyword);
 
         model.addAttribute("posts", postsDtoList);
+
+        if(user!=null){
+            // 세션에 저장된 값이 있을때만 model에 userName 으로 등록, 저장된 값이 없으면 model엔 아무런 값이 없는 상태이니 로그인 버튼이 보임
+            model.addAttribute("userName",user.getName());
+        }
 
         return "index";
     }
