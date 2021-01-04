@@ -31,9 +31,16 @@ public class IndexController {
     // 로그인 추가
     private final PostsService postsService;
     private final HttpSession httpSession;
+
     @GetMapping("/")
-    public String index(Model model, @LoginUser SessionUser user){   // 기존에 (user) httpSession.getAttribute("user")로 가져오던 세션 정보 값이 개선, 이제는 어느 컨트롤러든지 @LoginUser만 사용하면 세션 정보 가져올수 있음
-        model.addAttribute("posts",postsService.findAllDesc());
+    public String index(Model model, @LoginUser SessionUser user,  @RequestParam(value="page", defaultValue = "1" ) Integer pageNum){   // 기존에 (user) httpSession.getAttribute("user")로 가져오던 세션 정보 값이 개선, 이제는 어느 컨트롤러든지 @LoginUser만 사용하면 세션 정보 가져올수 있음
+       /* model.addAttribute("posts",postsService.findAllDesc());*/
+
+        List<PostsDto> postsDtoList = postsService.getPostsList(pageNum);
+        Integer[] pageList = postsService.getPageList(pageNum);
+
+        model.addAttribute("posts",postsDtoList);
+        model.addAttribute("pageList",pageList);
 
         /* 다른 컨트롤러와 메소드에서도 세션값이 필요하면 반복되기 때문에 메소드 인자로 세션값을 바도록 변경
        SessionUser user = (SessionUser) httpSession.getAttribute("user");  // 앞서 작성된 CustomOAuth2UserService 에서 로그인 성공 시 세션에 SeessionUser를 저장하도록 구성
@@ -80,20 +87,7 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/")
-    public String list(Model model, @LoginUser SessionUser user, @RequestParam(value="page", defaultValue = "1" ) Integer pageNum){
-        List<PostsDto> postsDtoList = postsService.getPostsList(pageNum);
-        Integer[] pageList = postsService.getPageList(pageNum);
 
-        model.addAttribute("posts",postsDtoList);
-        model.addAttribute("pageList",pageList);
-
-        if(user!=null){
-            model.addAttribute("userName",user.getName());
-        }
-
-        return "index";
-    }
 
 
 
