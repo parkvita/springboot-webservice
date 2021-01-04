@@ -80,6 +80,20 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/")
+    public String list(Model model, @LoginUser SessionUser user, @RequestParam(value="page", defaultValue = "1" ) Integer pageNum){
+        List<PostsDto> postsDtoList = postsService.getPostsList(pageNum);
+        Integer[] pageList = postsService.getPageList(pageNum);
+
+        model.addAttribute("posts",postsDtoList);
+        model.addAttribute("pageList",pageList);
+
+        if(user!=null){
+            model.addAttribute("userName",user.getName());
+        }
+
+        return "index";
+    }
 
 
 
